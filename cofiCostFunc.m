@@ -44,12 +44,15 @@ T = (X * Theta' - Y) .* R;
 J = sum((T .^ 2)(:)) / 2 ... 
     + lambda / 2 * ( sum((Theta .^ 2)(:)) + sum((X .^ 2)(:)) );
 
+rand_user = randi(num_users);
+rand_movie = randi(num_movies);
+
 for i = 1:size(X, 1)
-  X_grad(i, :) = T(i, :) * Theta + lambda * X(i, :);
+  X_grad(i, :) = T(i, rand_user) * Theta(rand_user, :) + lambda * X(i, :);
 endfor
 
 for j = 1:size(Theta, 1)
-  Theta_grad(j, :) = T(:, j)' * X + lambda * Theta(j, :); 
+  Theta_grad(j, :) = T(rand_movie, j) * X(rand_movie, :) + lambda * Theta(j, :); 
 endfor
 
 
