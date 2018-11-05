@@ -56,7 +56,7 @@ num_iters = 100;
 X = randn(num_movies, num_features);
 Theta = randn(num_users, num_features);
 
-[X, Theta, J_history] = SGDTrain(X, Theta, Ynorm, R, lambda, alpha, num_iters);
+[X, Theta, J_history] = sgdTrain(X, Theta, Ynorm, R, lambda, alpha, num_iters);
 plot(1:num_iters, J_history);
 
 fprintf('Recommender system learning completed.\n');
@@ -65,5 +65,5 @@ fprintf('Recommender system learning completed.\n');
 fprintf('\nValidation by RMSE...\n');
 
 P = X * Theta' + Ymean;
-fprintf("RMSE on the training   set is: %f, \n", RMSE(P, Y, R));
-fprintf("     on the validating set is: %f\n", RMSE(P, Y, R_val));
+fprintf("RMSE on the training   set is: %f, \n", rmse(P, Y, R));
+fprintf("     on the validating set is: %f\n", rmse(P, Y, R_val));
