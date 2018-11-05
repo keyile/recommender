@@ -1,6 +1,6 @@
 function rms = RMSE(P, Y, R)
-%RMSE Compute RMSE function
-%   rms = RMSE(P, Y, R) computes the RMSE of prediction P, 
+%RMSE Compute Root Mean Square Error.
+%   rms = RMSE(P, Y, R) computes the RMSE of predict ratings P, 
 %   real data Y, and marker matix R.
 
 % ====================== RMSE =================================

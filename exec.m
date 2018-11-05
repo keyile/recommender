@@ -49,14 +49,14 @@ fprintf('\nTraining collaborative filtering...\n');
 % Set parameters
 num_features = 10;
 lambda = 10;
-gamma = 0.003;
+alpha = 0.003;
 num_iters = 100;
 
 % Set Initial Parameters (Theta, X)
 X = randn(num_movies, num_features);
 Theta = randn(num_users, num_features);
 
-[X, Theta, J_history] = SGDTrain(X, Theta, Ynorm, R, lambda, gamma, num_iters);
+[X, Theta, J_history] = SGDTrain(X, Theta, Ynorm, R, lambda, alpha, num_iters);
 plot(1:num_iters, J_history);
 
 fprintf('Recommender system learning completed.\n');
