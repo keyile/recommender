@@ -1,13 +1,13 @@
-function rmse = RMSE(P, Y, R)
+function rms = RMSE(P, Y, R)
 %RMSE Compute RMSE function
-%   rmse = RMSE(z) computes the RMSE of prediction P, real ratings Y, and R.
-
+%   rms = RMSE(P, Y, R) computes the RMSE of prediction P, 
+%   real data Y, and marker matix R.
 
 % ====================== RMSE =================================
 
 num_records = sum(R(:));
 
-rmse = sqrt( sum( ((P - Y) .* R)(:) .^ 2 ) /  num_records );
+rms = sqrt( sum( ((P - Y) .* R)(:) .^ 2 ) /  num_records );
 
 % =============================================================
 

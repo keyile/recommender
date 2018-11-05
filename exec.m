@@ -32,9 +32,11 @@ fprintf('\nConverting rating records to matrix...\n');
 %  Useful Values
 num_users = 943;
 num_movies = 1682;
-num_features = 10;
+
+% Training set and validating set use the common matrix Y, and use R and R_val to
+% mark if some rating exsits.
 train_ratio = 0.8;
-[Y, R, Y_val, R_val] = divideDataset(data, num_users, num_movies, train_ratio);
+[Y, R, R_val] = divideDataset(data, num_users, num_movies, train_ratio);
 
 fprintf('Dataset is divided into training set and validating set,\n');
 fprintf('size: %d / %d.\n', sum(R(:)), sum(R_val(:)) );
@@ -44,14 +46,16 @@ fprintf('\nTraining collaborative filtering...\n');
 %  Normalize Ratings
 [Ynorm, Ymean] = normalizeRatings(Y, R);
 
+% Set parameters
+num_features = 10;
+lambda = 10;
+gamma = 0.003;
+num_iters = 100;
+
 % Set Initial Parameters (Theta, X)
 X = randn(num_movies, num_features);
 Theta = randn(num_users, num_features);
 
-% Set parameters
-lambda = 10;
-gamma = 0.003;
-num_iters = 100;
 [X, Theta, J_history] = SGDTrain(X, Theta, Ynorm, R, lambda, gamma, num_iters);
 plot(1:num_iters, J_history);
 
@@ -62,4 +66,4 @@ fprintf('\nValidation by RMSE...\n');
 
 P = X * Theta' + Ymean;
 fprintf("RMSE on the training   set is: %f, \n", RMSE(P, Y, R));
-fprintf("     on the validating set is: %f\n", RMSE(P, Y_val, R_val));
+fprintf("     on the validating set is: %f\n", RMSE(P, Y, R_val));
