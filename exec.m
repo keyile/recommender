@@ -44,22 +44,27 @@ fprintf('size: %d / %d.\n', sum(R(:)), sum(R_val(:)) );
 %% ================== Learning Movie Ratings ====================
 fprintf('\nTraining collaborative filtering...\n');
 %  Normalize Ratings
-[Ynorm, Ymean] = normalizeRatings(Y, R);
+%  mu -- global average bias
+[Ynorm, mu] = normalizeRatings(Y, R);
 
 % Set parameters
 num_features = 10;
-lambda = 0.01;
+lambda = 0.03;
 alpha = 0.03;
-num_iters = 5000;
+num_iters = 2000;
 fprintf('Learning parameters:\n');
-fprintf('     %d  %.3f  %.3f  %d\n', num_features, lambda, alpha, num_iters);
+fprintf('     num_features = %d\n', num_features);
+fprintf('     lambda       = %.3f\n', lambda);
+fprintf('     alpha        = %.3f\n', alpha);
+fprintf('     num_iters    = %d\n', num_iters);
 
 % Set Initial Parameters (Theta, X)
-X = randn(num_movies, num_features);
-Theta = randn(num_users, num_features);
+% first column is bi and bu -- item bias and user bias
+X = randn(num_movies, num_features + 1);
+Theta = randn(num_users, num_features + 1);
 
-fprintf('Training...\n');
-[X, Theta, J_history] = sgdTrain(X, Theta, Y, R, lambda, alpha, num_iters);
+fprintf('...\n');
+[X, Theta, J_history] = sgdTrain(X, Theta, Ynorm, R, lambda, alpha, num_iters);
 plot(1:num_iters, J_history);
 
 fprintf('Recommender system learning completed.\n');
@@ -67,6 +72,6 @@ fprintf('Recommender system learning completed.\n');
 %% ================== Validation by RMSE ====================
 fprintf('\nValidation by RMSE...\n');
 
-P = X * Theta';
+P = predictRatings(X, Theta, mu);
 fprintf("RMSE on the training   set is: %f, \n", rmse(P, Y, R));
 fprintf("     on the validating set is: %f\n", rmse(P, Y, R_val));
