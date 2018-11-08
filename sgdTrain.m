@@ -30,13 +30,13 @@ for iter = 1:num_iters
     rand_user = randi(num_users);
     rand_movie = randi(num_movies);
 
-    % update X
+    % update X, both qi and bi components
     X_grad(:, 2:end) = E(:, rand_user) * Theta(rand_user, 2:end) ...
                         + lambda * X(:, 2:end);
     X_grad(:, 1) = E(:, rand_user) + lambda * X(:, 1);
     X = X - alpha * X_grad;
 
-    % update Theta
+    % update Theta, consists of pu and bu
     Theta_grad(:, 2:end) = E(rand_movie, :)' * X(rand_movie, 2:end) ...
                         + lambda * Theta(:, 2:end);
     Theta_grad(:, 1) = E(rand_movie, :)' + lambda * Theta(:, 1);

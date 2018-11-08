@@ -1,7 +1,9 @@
 function [Y, R1, R2] = divideDataset(data, num_users, ...
                                                 num_movies, train_ratio)
-%RMSE Compute RMSE function
-%   rmse = RMSE(z) computes the RMSE of prediction P, real ratings Y, and R1.
+%DiVIDEDATASET divides the dataset into training set and validating set
+%   [Y, R1, R2] = divideDataset(data, num_users, num_movies, train_ratio) 
+%   converts the data into a matrix Y, and label if it is ranked using R1 and
+%   R2, which is the training set and validating set.
 
 
 % ====================== divideDataset ========================

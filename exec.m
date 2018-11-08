@@ -48,7 +48,7 @@ fprintf('\nTraining collaborative filtering...\n');
 [Ynorm, mu] = normalizeRatings(Y, R);
 
 % Set parameters
-num_features = 10;
+num_features = 20;
 lambda = 0.03;
 alpha = 0.03;
 num_iters = 2000;
