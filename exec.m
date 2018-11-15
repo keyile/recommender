@@ -8,8 +8,13 @@ clear ; close all; clc
 %% =============== Loading movie ratings dataset ================
 fprintf('Loading movie ratings dataset...\n');
 
+%  set dataset info
+filename = 'dataset/ml-100k/u.data';
+num_users = 943;
+num_movies = 1682;
+
 %  Load data
-data = load('dataset/ml-100k/u.data');
+data = load(filename);
 ##  u.data     -- The full u data set, 100000 ratings by 943 users on 1682 items.
 ##                Each user has rated at least 20 movies.  Users and items are
 ##                numbered consecutively from 1.  The data is randomly
@@ -28,10 +33,6 @@ fprintf('Number of ratings records: %d.\n', size(data, 1));
 %  R is a 1682x943 matrix, where R(i,j) = 1 if and only if user j gave a
 %  rating to movie i
 fprintf('\nConverting rating records to matrix...\n');
-
-%  Useful Values
-num_users = 943;
-num_movies = 1682;
 
 % Training set and validating set use the common matrix Y, and use R and R_val to
 % mark if some rating exsits.
