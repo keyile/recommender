@@ -1,6 +1,6 @@
 function [X, Theta, J_history] = sgdTrain(X, Theta, Y, R, lambda, alpha, ...
                                num_iters)
-%sgdTrain Performs stochastic gradient descent to learn X and Theta
+%SGDTrain Performs stochastic gradient descent to learn X and Theta
 %   [X, Theta, J_history] = sgdTrain(X, Theta, Y, R, lambda, alpha, num_iters) 
 %   updates X and Theta by taking num_iters gradient steps with learning rate
 %   alpha. lambda is the regulization parameter.
