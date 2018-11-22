@@ -1,5 +1,14 @@
 %% Recommender alogrithm based on matrix factorization
 
+%% This is the main function and contains the follow parameters:
+
+%%     num_features : the dimension of the latent factor
+%%     lambda       : the regularization term
+%%     alpha        : the learning rate
+%%     num_iters    : the number of iters, as you guess
+
+%% And there is also a `train_ratio` you can play with, which controls the 
+%% division of training and validating set.
 
 %% Initialization
 clear ; close all; clc

@@ -14,6 +14,12 @@ J_history = zeros(num_iters, 1);
 X_grad = zeros(size(X));
 Theta_grad = zeros(size(Theta));
 
+% random choose some users and movies
+% Note that we choose random number only once, then just increse the number
+% in every iteration.
+rand_user = randi(num_users);
+rand_movie = randi(num_movies);
+
 for iter = 1:num_iters
 
     % ====================== Loop body ======================
@@ -25,10 +31,6 @@ for iter = 1:num_iters
     % to retrieve pu and qi matrix
     E = (X(:, 2:end) * Theta(:, 2:end)' + X(:, 1) + Theta(:, 1)' - Y) .* R;
 
-
-    % random choose some user and movie
-    rand_user = randi(num_users);
-    rand_movie = randi(num_movies);
 
     % update X, both qi and bi components
     X_grad(:, 2:end) = E(:, rand_user) * Theta(rand_user, 2:end) ...
@@ -48,6 +50,11 @@ for iter = 1:num_iters
     J_history(iter) = sum((E .^ 2)(:)) ...
         + lambda * ( sum((Theta .^ 2)(:)) + sum((X .^ 2)(:)) );
 
+    % increase the random number and keep the number between 1 and total number
+    rand_user  = mod(rand_user, num_users)   + 1;
+    rand_movie = mod(rand_movie, num_movies) + 1;
+    % -- mod (X, Y)
+    % Compute the modulo of X and Y.
 end
 
 end
