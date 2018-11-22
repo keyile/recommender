@@ -2,6 +2,27 @@
 
 使用Octave实现的基于协同过滤的推荐系统算法。
 
+## 运行方法
+
+1. 将远程仓库克隆至本地：
+
+   ```shell
+   $ git clone https://github.com/sourcerunner/recommender.git
+   ```
+
+2. 在Octave中，切换工作目录到本地仓库：
+
+   ```octave
+   >> cd 'recommender'
+   ```
+
+3. 调节`exec.m`文件中的参数，然后执行命令：
+
+   ```octave
+   >> exec
+   ```
+
+
 ## 数据集
 
 使用电影评价数据集，数据来自[MovieLens](https://grouplens.org/datasets/movielens/)
