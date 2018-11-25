@@ -1,4 +1,4 @@
-%% Recommender alogrithm based on matrix factorization
+%% Recommender system alogrithm based on matrix factorization
 
 %% This is the main function and contains the follow parameters:
 
@@ -17,10 +17,12 @@ clear ; close all; clc
 %% =============== Loading movie ratings dataset ================
 fprintf('Loading movie ratings dataset...\n');
 
-%  set dataset info
+% set dataset info
 filename = 'dataset/ml-100k/u.data';
 num_users = 943;
 num_movies = 1682;
+% and how you'd like to divide the dataset
+train_ratio = 0.8;
 
 %  Load data
 data = load(filename);
@@ -39,13 +41,17 @@ fprintf('Number of ratings records: %d.\n', size(data, 1));
 %  Y is a 1682x943 matrix, containing ratings (1-5) of 1682 movies on 
 %  943 users
 %
-%  R is a 1682x943 matrix, where R(i,j) = 1 if and only if user j gave a
-%  rating to movie i
+%  R is a 1682x943 matrix, where R(i,j) = 1 if and only if in the training set
+%  user j gave a rating to movie i
+%
+%  R_val is a 1682x943 matrix, where R_val(i,j) = 1 if and only if in the validating set
+%  user j gave a rating to movie i
+
 fprintf('\nConverting rating records to matrix...\n');
 
 % Training set and validating set use the common matrix Y, and use R and R_val to
 % mark if some rating exsits.
-train_ratio = 0.8;
+
 [Y, R, R_val] = divideDataset(data, num_users, num_movies, train_ratio);
 
 fprintf('Dataset is divided into training set and validating set,\n');

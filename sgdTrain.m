@@ -29,19 +29,32 @@ for iter = 1:num_iters
     % Compute the error matrix
     % have added bu and bi on the first column, so use (2:end) 
     % to retrieve pu and qi matrix
-    E = (X(:, 2:end) * Theta(:, 2:end)' + X(:, 1) + Theta(:, 1)' - Y) .* R;
+    E = (
+        X(:, 2:end) * Theta(:, 2:end)' % compute q_i * p_u
+        + X(:, 1)                      % add b_i on every row
+        + Theta(:, 1)'                 % add b_u on every column
+        - Y                            % difference from real ratings
+        ).* R;                         % cast the mask
 
 
-    % update X, both qi and bi components
+    % compute the gradient of X and Theta
+    % gradient of x_i
     X_grad(:, 2:end) = E(:, rand_user) * Theta(rand_user, 2:end) ...
                         + lambda * X(:, 2:end);
-    X_grad(:, 1) = E(:, rand_user) + lambda * X(:, 1);
-    X = X - alpha * X_grad;
 
-    % update Theta, consists of pu and bu
+    % gradient of x_1
+    X_grad(:, 1) = E(:, rand_user) + lambda * X(:, 1);
+
+    % gradient of theta_i
     Theta_grad(:, 2:end) = E(rand_movie, :)' * X(rand_movie, 2:end) ...
                         + lambda * Theta(:, 2:end);
+
+    % gradient of theta_1
     Theta_grad(:, 1) = E(rand_movie, :)' + lambda * Theta(:, 1);
+
+
+    % update X and Theta
+    X     = X     - alpha * X_grad;
     Theta = Theta - alpha * Theta_grad;
 
     % ============================================================
