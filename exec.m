@@ -65,9 +65,9 @@ fprintf('\nTraining collaborative filtering...\n');
 
 % Set parameters
 num_features = 30;
-lambda = 0.03;
-alpha = 0.02;
-num_iters = 3000;
+lambda = 0.20;
+alpha = 0.05;
+num_iters = 4;
 fprintf('Learning parameters:\n');
 fprintf('     num_features = %d\n', num_features);
 fprintf('     lambda       = %.3f\n', lambda);
@@ -81,7 +81,7 @@ Theta = randn(num_users, num_features + 1);
 
 fprintf('...\n');
 [X, Theta, J_history] = sgdTrain(X, Theta, Ynorm, R, lambda, alpha, num_iters);
-plot(1:num_iters, J_history);
+plot(1:length(J_history), J_history);
 
 fprintf('Recommender system learning completed.\n');
 

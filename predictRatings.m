@@ -4,7 +4,10 @@ function P = predictRatings(X, Theta, mu)
 %   with the input parameter X, Theta and mu.
 
 
-P = X(:, 2:end) * Theta(:, 2:end)' + X(:, 1) + Theta(:, 1)' + mu;
+P = X(:, 2:end) * Theta(:, 2:end)' ...  % compute q_i * p_u
+    + X(:, 1)                      ...  % add b_i on every row
+    + Theta(:, 1)'                 ...  % add b_u on every column
+    + mu;                               % add global bias mu
 
 
 end
