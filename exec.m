@@ -1,14 +1,12 @@
 %% Recommender system alogrithm based on matrix factorization
 
-%% This is the main function and contains the follow parameters:
-
+%% This is the main executable specified for the *ml-100k* dataset,
+%% and contains the follow parameters:
+%%     train_ratio  : the devision ratio of training and validating set
 %%     num_features : the dimension of the latent factor
 %%     lambda       : the regularization term
 %%     alpha        : the learning rate
-%%     num_iters    : the number of iters, as you guess
-
-%% And there is also a `train_ratio` you can play with, which controls the 
-%% division of training and validating set.
+%%     num_iters    : the number of epoches, as you guess
 
 %% Initialization
 clear ; close all; clc
@@ -26,12 +24,12 @@ train_ratio = 0.8;
 
 %  Load data
 data = load(filename);
-##  u.data     -- The full u data set, 100000 ratings by 943 users on 1682 items.
-##                Each user has rated at least 20 movies.  Users and items are
-##                numbered consecutively from 1.  The data is randomly
-##                ordered. This is a tab separated list of 
-##                      user id | item id | rating | timestamp. 
-##                The time stamps are unix seconds since 1/1/1970 UTC   
+%%  u.data     -- The full u data set, 100000 ratings by 943 users on 1682 items.
+%%                Each user has rated at least 20 movies.  Users and items are
+%%                numbered consecutively from 1.  The data is randomly
+%%                ordered. This is a tab separated list of
+%%                      user id | item id | rating | timestamp.
+%%                The time stamps are unix seconds since 1/1/1970 UTC
 
 fprintf('First five of the data:\n');
 display(data(1:5, :));

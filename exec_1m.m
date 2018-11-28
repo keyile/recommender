@@ -1,14 +1,12 @@
 %% Recommender system alogrithm based on matrix factorization
 
-%% This is the main function and contains the follow parameters:
-
+%% This is the main executable specified for the *ml-1m* dataset,
+%% and contains the follow parameters:
+%%     train_ratio  : the devision ratio of training and validating set
 %%     num_features : the dimension of the latent factor
 %%     lambda       : the regularization term
 %%     alpha        : the learning rate
-%%     num_iters    : the number of iters, as you guess
-
-%% And there is also a `train_ratio` you can play with, which controls the 
-%% division of training and validating set.
+%%     num_iters    : the number of epoches, as you guess
 
 %% Initialization
 clear ; close all; clc
@@ -26,7 +24,7 @@ train_ratio = 0.8;
 
 %  Load data
 data = dlmread(filename, ':');
-data = data(:, [1, 3, 5]);
+data = data(:, [1, 3, 5, 7]);
 %% All ratings are contained in the file "ratings.dat" and are in the
 %% following format:
 %% 
